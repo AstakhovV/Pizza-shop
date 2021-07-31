@@ -316,7 +316,7 @@ a {
   margin-bottom: 65px;
 }
 .pizza-block:not(:nth-of-type(4n)) {
-  margin-right: 35px;
+  margin-right: 3.7%;
 }
 .pizza-block__image {
   width: 260px;
@@ -406,7 +406,7 @@ body {
 .content__items {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: flex-start;
 }
 .content__top {
   display: flex;
@@ -420,7 +420,7 @@ body {
 }
 .container--cart {
   max-width: 820px;
-  margin: 90px auto;
+  margin: 0 auto;
 }
 .container--cart .content__title {
   margin: 0;
@@ -445,7 +445,7 @@ body {
 }
 .cart .content__title svg path {
   stroke: #232323;
-  stroke-width: 1.9;
+  strokeWidth: 1.9;
 }
 .cart__clear {
   display: flex;
