@@ -11,12 +11,14 @@ const cartReducer = (state = InitialState, action) => {
             return {
                 ...state,
                 items: {
-                    [action.payload.id]:[
-                        ...state.items[action.payload.id],
-                        action.payload
-                    ]
+                    ...state.items,
+                    [action.payload.id]:
+                        !state.items[action.payload.id] ? [action.payload]
+                            :
+                        [...state.items[action.payload.id],
+                        action.payload]
                 },
-                totalPrice : state.totalPrice + action.payload,
+                totalPrice : state.totalPrice + action.payload.price,
                 itemsCount : state.itemsCount + 1
             }
         case 'SET_TOTAL_COUNT':
