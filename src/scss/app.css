@@ -468,8 +468,11 @@ body {
 .cart__clear span {
   display: inline-block;
   margin-left: 7px;
-  color: #b6b6b6;
+  color: white;
   font-size: 18px;
+}
+.cart__clear svg path {
+  stroke: white;
 }
 .cart__clear span,
 .cart__clear svg,
@@ -613,7 +616,7 @@ body {
   padding: 16px;
 }
 .cart--empty {
-  margin: 0 auto;
+  margin: 2rem auto;
   width: 560px;
   text-align: center;
 }

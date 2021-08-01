@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import {Button} from "../Button";
 
 export const PizzaBlock = (props) => {
-    const {id, imageUrl, name,sizes, types, price, onClickAddPizza, addedCount} = props
+    const {id, imageUrl, name,sizes, types, price, onClickAddPizza, addedCount, randomKey} = props
 
     const availableTypes = ['тонкое', 'традиционное']
     const availableSize = [26, 30, 40]
@@ -28,6 +28,7 @@ export const PizzaBlock = (props) => {
             type: availableTypes[activeType],
             size: activeSize,
             price: pricePizza,
+            randomKey
         }
         onClickAddPizza(obj)
     }

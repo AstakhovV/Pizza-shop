@@ -36,7 +36,7 @@ export const Home = () => {
 
     useEffect(() => {
         dispatch(fetchPizza(activeSort, activeCategory))
-    }, [activeSort, activeCategory])
+    }, [activeSort, activeCategory, dispatch])
 
     return (
         <div className="container">
@@ -56,6 +56,7 @@ export const Home = () => {
                 { itemsLoading ?
                     itemsPizza.map(item => (
                         <PizzaBlock
+                            randomKey={Math.floor(Math.random()*1000000)}
                             onClickAddPizza={onAddPizza}
                             key={item.id}
                             addedCount={cartItems[item.id] && cartItems[item.id].length}
