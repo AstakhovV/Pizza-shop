@@ -8,12 +8,7 @@ import {PizzaLoadingBlock} from "../components/PizzaBlock/PizzaLoadingBlock";
 import {actions, PizzaObjTyp} from "../redux/reducer/cart-reducer";
 import {AppStateType} from "../redux/store";
 
-const categoryNames = ['Мясные', 'Вегетарианская', 'Гриль', 'Острые', 'Закрытые']
-const  sortItem = [
-    {name: 'популярности', type: 'rating', order: 'desc'},
-    {name: 'цене', type: 'price', order: 'desc'},
-    {name: 'алфавиту', type: 'name', order: 'asc'}
-]
+
 type PropType = {}
 
 export const Home: React.FC<PropType> = () => {
@@ -52,9 +47,8 @@ export const Home: React.FC<PropType> = () => {
                 <Categories
                     activeCategory={activeCategory}
                     onClickItem={dispatchByCategory}
-                    items={categoryNames}/>
-                <SortPopup items={sortItem}
-                           activeSort={activeSort.type}
+                    />
+                <SortPopup activeSort={activeSort.type}
                            onClickSort={dispatchBySort}/>
             </div>
 

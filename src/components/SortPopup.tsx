@@ -1,22 +1,22 @@
 import * as React from "react";
 import {useEffect, useRef, useState} from "react";
 
-type ObjectProp = {
-    name: string,
-    type: string,
-    order: string,
-}
+const  sortItem: ({ name: string; type: string; order: string })[] = [
+    {name: 'популярности', type: 'rating', order: 'desc'},
+    {name: 'цене', type: 'price', order: 'desc'},
+    {name: 'алфавиту', type: 'name', order: 'asc'}
+]
+
 
 type PropTypes = {
     activeSort: string,
-    items: Array<ObjectProp>,
     onClickSort: (obj:any) => void
 }
-export const SortPopup: React.FC<PropTypes> = React.memo(({items, activeSort, onClickSort})=>{
+export const SortPopup: React.FC<PropTypes> = React.memo(({ activeSort, onClickSort})=>{
 
     const [visiblePopup, setVisiblePopup] = useState(false)
     const sortRef = useRef(null)
-    const activeItem = items!.find(obj => obj.type === activeSort).name
+    const activeItem = sortItem.find(obj => obj.type === activeSort).name
 
     const toggleVisiblePopup = () => {
         setVisiblePopup(!visiblePopup)
@@ -58,8 +58,8 @@ export const SortPopup: React.FC<PropTypes> = React.memo(({items, activeSort, on
                 visiblePopup &&
                 <div className="sort__popup">
                     <ul>
-                        {items &&
-                        items.map((obj, index) => (
+                        {sortItem &&
+                        sortItem.map((obj, index) => (
                             <li className={activeSort === obj.type ? 'active' : ''}
                                 onClick={() => changePopup(obj)}
                                 key={`${obj}_${index}`}>{obj.name}</li>
