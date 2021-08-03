@@ -1,10 +1,10 @@
 import React, {useCallback, useEffect} from 'react'
 import {Categories, SortPopup, PizzaBlock} from "../components";
 import {useDispatch, useSelector} from "react-redux";
-import {setCategory, setSortBy} from "../redux/actions/filters-actions";
-import {fetchPizza} from "../redux/actions/pizzas-actions";
+import {actionsFilters} from "../redux/reducer/filters-reducer";
+import {fetchPizza} from "../redux/reducer/pizzas-reducer";
 import {PizzaLoadingBlock} from "../components/PizzaBlock/PizzaLoadingBlock";
-import {addPizzaToCart} from "../redux/actions/cart-actions";
+import {actions} from "../redux/reducer/cart-reducer";
 
 const categoryNames = ['Мясные', 'Вегетарианская', 'Гриль', 'Острые', 'Закрытые']
 const  sortItem = [
@@ -21,21 +21,25 @@ export const Home = () => {
     const cartItems = useSelector(state => state.cart.items)
     const activeCategory = useSelector(state => state.filters.category)
 
+    const result = cartItems.reduce(function(acc, el) {
+        acc[el.name] = (acc[el.name] || 0) + 1;
+        return acc;
+    }, {})
 
     const dispatchByCategory = useCallback((name) => {
-        dispatch(setCategory(name))
+        dispatch(actionsFilters.setCategory(name))
     }, [dispatch])
 
     const dispatchBySort = useCallback((type) => {
-        dispatch(setSortBy(type))
+        dispatch(actionsFilters.setSortBy(type))
     }, [dispatch])
 
     const onAddPizza = (obj) => {
-        dispatch(addPizzaToCart(obj))
+        dispatch(actions.addPizzaToCart(obj))
     }
 
     useEffect(() => {
-        dispatch(fetchPizza(activeSort, activeCategory))
+            dispatch(fetchPizza(activeSort, activeCategory))
     }, [activeSort, activeCategory, dispatch])
 
     return (
@@ -55,11 +59,12 @@ export const Home = () => {
             <div className="content__items">
                 { itemsLoading ?
                     itemsPizza.map(item => (
+
                         <PizzaBlock
                             randomKey={Math.floor(Math.random()*1000000)}
                             onClickAddPizza={onAddPizza}
                             key={item.id}
-                            addedCount={cartItems[item.id] && cartItems[item.id].length}
+                            addedCount={result[item.name]}
                             {...item}/>
                     ))
                     : Array(12).fill(0).map((item, index) =>(

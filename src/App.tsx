@@ -1,5 +1,5 @@
 import './App.css';
-import React from 'react'
+import * as React from 'react'
 import {Header} from "./components";
 import {Cart, Home} from "./pages";
 import {Route} from "react-router-dom";

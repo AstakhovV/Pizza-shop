@@ -86,7 +86,7 @@ export const PizzaBlock = (props) => {
                                 />
                             </svg>
                             <span> Добавить</span>
-                            {addedCount &&
+                            {addedCount>0 &&
                                 <i>{addedCount}</i>
                             }
                         </Button>

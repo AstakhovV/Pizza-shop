@@ -4,7 +4,8 @@ import {useDispatch, useSelector} from "react-redux";
 import {Link} from "react-router-dom";
 import {Button} from "../components";
 import cartEmptyImage from '../assets/img/empty-cart.png';
-import {clearCart, removeCartItem} from "../redux/actions/cart-actions";
+import {actions} from "../redux/reducer/cart-reducer";
+
 
 export const Cart = () => {
     const cartPrice = useSelector(state => state.cart.totalPrice)
@@ -14,17 +15,33 @@ export const Cart = () => {
 
     const onClearCart = () => {
         if (window.confirm('Вы действительно хотите очистить корзину?')) {
-            dispatch(clearCart());
+            dispatch(actions.clearCart());
         }
-    };
+    }
+    const onAddItems = (key) => {
+        dispatch(actions.plusCartItem(key));
+    }
     const onRemoveItems = (key) => {
+        dispatch(actions.minusCartItem(key));
+    }
+    const onClearItems = (key) => {
         if (window.confirm('Вы действительно хотите удалить пиццу?')) {
-            dispatch(removeCartItem(key));
+            dispatch(actions.removeCartItem(key))
         }
-    };
+    }
     const onClickOrder = () => {
-        console.log('ВАШ ЗАКАЗ', cartItems);
+        alert('Оплата прошла успешно! Ждите пицку');
     };
+    const filterCartItems = cartItems.filter((item,index) => {
+        return index === cartItems.findIndex(obj => {
+            return JSON.stringify(`${obj.name}${obj.type}${obj.size}`) === JSON.stringify(`${item.name}${item.type}${item.size}`);
+        })
+    })
+    const resultValue = cartItems.reduce(function(acc, el) {
+        const filteredItem = `${el.name}${el.type}${el.size}`
+        acc[filteredItem] = (acc[filteredItem] || 0) + 1;
+        return acc;
+    }, {})
 
     return (
         <div className="container container--cart">
@@ -62,7 +79,7 @@ export const Cart = () => {
                 </div>
                 <div className="content__items">
                     {
-                        cartItems.length>0 ? cartItems.map(item => {
+                        filterCartItems.length>0 ? filterCartItems.map(item => {
                             return <CartItem key={item.randomKey}
                                              randomKey={item.randomKey}
                                              name={item.name}
@@ -70,9 +87,11 @@ export const Cart = () => {
                                              type={item.type}
                                              size={item.size}
                                              imgURl={item.imageUrl}
-                                             price={item.price}
-                                             value={item.value}
+                                             price={item.price*resultValue[`${item.name}${item.type}${item.size}`]}
+                                             value={resultValue[`${item.name}${item.type}${item.size}`]}
                                              removePizza={onRemoveItems}
+                                             addPizza={onAddItems}
+                                             clearPizza={onClearItems}
                             />
                         })
                             :
@@ -101,17 +120,14 @@ export const Cart = () => {
                         <span> Сумма заказа: <b>{cartPrice} ₽</b> </span>
                     </div>
                     <div className="cart__bottom-buttons">
-                        <a href="/" className="button button--outline button--add go-back-btn">
+                        <Link to="/" className="button button--outline button--add go-back-btn">
                             <svg width="8" height="14" viewBox="0 0 8 14" fill="none"
                                  xmlns="http://www.w3.org/2000/svg">
                                 <path d="M7 13L1 6.93015L6.86175 1" stroke="#D3D3D3" strokeWidth="1.5"
                                       strokeLinecap="round" strokeLinejoin="round"/>
                             </svg>
-
-                            <Link to="/">
-                                <span>Вернуться назад</span>
-                            </Link>
-                        </a>
+                            <span>Вернуться назад</span>
+                        </Link>
                         <Button onClick={onClickOrder} className="pay-btn">
                             <span>Оплатить сейчас</span>
                         </Button>
