@@ -1,12 +1,17 @@
+// @ts-ignore
 import logoSVG from "../assets/img/pizza-logo.svg";
-import React from 'react'
+import * as React from 'react'
 import {Button} from "./Button";
 import {Link} from "react-router-dom";
 import {useSelector} from "react-redux";
+import {AppStateType} from "../redux/store";
 
-export function Header() {
-    const totalPrice = useSelector(state => state.cart.totalPrice)
-    const totalCount = useSelector(state => state.cart.itemsCount)
+type PropType = {
+}
+
+export const Header: React.FC<PropType> = () => {
+    const totalPrice: number = useSelector((state:AppStateType) => state.cart.totalPrice)
+    const totalCount: number  = useSelector((state:AppStateType) => state.cart.itemsCount)
 
     return (
         <div className="header">

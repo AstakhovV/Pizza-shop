@@ -95,6 +95,7 @@ type ActionsType = InferActionsTypes<typeof actions>
 export type PizzaObjTyp ={
     id: number,
     name: string,
+    value: number,
     imageUrl: string,
     type: number,
     size: number,

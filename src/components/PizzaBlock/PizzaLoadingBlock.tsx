@@ -1,9 +1,10 @@
-import React from "react"
+import * as React from "react"
 import ContentLoader from "react-content-loader"
 
+type PropsType = {
+}
 
-
-export const PizzaLoadingBlock= (props) => (
+export const PizzaLoadingBlock: React.FC<PropsType> = (props) => (
     <ContentLoader
         className="pizza-block"
         speed={2}

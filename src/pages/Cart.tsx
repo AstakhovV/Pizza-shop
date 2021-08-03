@@ -1,16 +1,21 @@
-import React from 'react'
+import * as React from 'react'
 import {CartItem} from "../components/CartItem";
 import {useDispatch, useSelector} from "react-redux";
 import {Link} from "react-router-dom";
 import {Button} from "../components";
+// @ts-ignore
 import cartEmptyImage from '../assets/img/empty-cart.png';
-import {actions} from "../redux/reducer/cart-reducer";
+import {actions, PizzaObjTyp} from "../redux/reducer/cart-reducer";
+import {AppStateType} from "../redux/store";
 
+type PropType = {
+}
 
-export const Cart = () => {
-    const cartPrice = useSelector(state => state.cart.totalPrice)
-    const cartCount = useSelector(state => state.cart.itemsCount)
-    const cartItems = useSelector(state => state.cart.items)
+export const Cart: React.FC<PropType> = () => {
+    const cartPrice: number = useSelector((state:AppStateType) => state.cart.totalPrice)
+    const cartCount: number = useSelector((state:AppStateType) => state.cart.itemsCount)
+    const cartItems: Array<PizzaObjTyp> = useSelector((state:AppStateType) => state.cart.items)
+
     const dispatch = useDispatch()
 
     const onClearCart = () => {
@@ -30,6 +35,7 @@ export const Cart = () => {
         }
     }
     const onClickOrder = () => {
+
         alert('Оплата прошла успешно! Ждите пицку');
     };
     const filterCartItems = cartItems.filter((item,index) => {
@@ -83,7 +89,6 @@ export const Cart = () => {
                             return <CartItem key={item.randomKey}
                                              randomKey={item.randomKey}
                                              name={item.name}
-                                             id={item.id}
                                              type={item.type}
                                              size={item.size}
                                              imgURl={item.imageUrl}

@@ -1,9 +1,21 @@
-import React, {useState} from 'react'
+import * as React from 'react'
+import {useState} from 'react'
 import classNames from "classnames";
-import PropTypes from 'prop-types'
 import {Button} from "../Button";
 
-export const PizzaBlock = (props) => {
+type PropTypes = {
+    id: number,
+    name: string,
+    imageUrl: string,
+    price: Array<number>,
+    types: Array<number>,
+    sizes: Array<number>,
+    onClickAddPizza: (obj) => void,
+    addedCount: number,
+    randomKey: number
+}
+
+export const PizzaBlock: React.FC<PropTypes> = (props) => {
     const {id, imageUrl, name,sizes, types, price, onClickAddPizza, addedCount, randomKey} = props
 
     const availableTypes = ['тонкое', 'традиционное']
@@ -32,6 +44,7 @@ export const PizzaBlock = (props) => {
         }
         onClickAddPizza(obj)
     }
+
 
     return (
         <div className="pizza-block">
@@ -93,20 +106,4 @@ export const PizzaBlock = (props) => {
                     </div>
                 </div>
     )
-}
-
-PizzaBlock.propTypes = {
-    name: PropTypes.string,
-    imageURL: PropTypes.string,
-    price: PropTypes.arrayOf(PropTypes.number),
-    types: PropTypes.arrayOf(PropTypes.number),
-    sizes: PropTypes.arrayOf(PropTypes.number),
-    onAddPizza: PropTypes.func,
-    addedCount: PropTypes.number
-}
-PizzaBlock.defaultProps = {
-    name: '---',
-    price: [],
-    types: [],
-    sizes: [],
 }

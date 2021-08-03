@@ -1,7 +1,18 @@
-import React, {useEffect, useRef, useState} from "react";
-import PropTypes from "prop-types";
+import * as React from "react";
+import {useEffect, useRef, useState} from "react";
 
-export const SortPopup = React.memo(({items, activeSort, onClickSort})=>{
+type ObjectProp = {
+    name: string,
+    type: string,
+    order: string,
+}
+
+type PropTypes = {
+    activeSort: string,
+    items: Array<ObjectProp>,
+    onClickSort: (item) => void
+}
+export const SortPopup: React.FC<PropTypes> = React.memo(({items, activeSort, onClickSort})=>{
 
     const [visiblePopup, setVisiblePopup] = useState(false)
     const sortRef = useRef(null)
@@ -60,14 +71,3 @@ export const SortPopup = React.memo(({items, activeSort, onClickSort})=>{
         </div>
     )
 })
-
-SortPopup.propTypes = {
-    activeSort: PropTypes.string,
-    items: PropTypes.arrayOf(PropTypes.object).isRequired,
-    onClickSort: PropTypes.func.isRequired
-}
-SortPopup.defaultProps = {
-    activeSort: '',
-    items: [],
-    onClickSort: [],
-}

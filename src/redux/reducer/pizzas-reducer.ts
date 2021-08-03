@@ -1,11 +1,13 @@
 import axios from "axios";
+import {BaseThunkType, InferActionsTypes} from "../store";
+import {SortBy} from "./filters-reducer";
 
 const InitialState = {
-    items: [],
-    isLoaded: false
+    items: [] as Array<ItemsType>,
+    isLoaded: false as boolean
 }
 
-const pizzasReducer = (state = InitialState, action) => {
+const pizzasReducer = (state = InitialState, action: ActionsType):{ items: Array<ItemsType>; isLoaded: boolean } => {
     switch (action.type) {
         case 'SET_PIZZAS':
             return {
@@ -24,12 +26,11 @@ const pizzasReducer = (state = InitialState, action) => {
 }
 
 export const actionsPizza = {
-    setLoaded: (val) => ({type: 'SET_LOADED', payload: val}),
-    setPizzas: (items) => ({type: 'SET_PIZZAS', payload: items})
+    setLoaded: (val: boolean) => ({type: 'SET_LOADED', payload: val} as const),
+    setPizzas: (items: Array<ItemsType>) => ({type: 'SET_PIZZAS', payload: items} as const)
 }
 
-
-export const fetchPizza = (sort, category)=> (dispatch) => {
+export const fetchPizza = (sort: SortBy, category: null | number): (dispatch) => void => (dispatch) => {
     dispatch(actionsPizza.setLoaded(false))
     axios.get(`/pizzas?${category !== null ? `category=${category}` : ''}&_sort=${sort.type}&_order=${sort.order}`)
         .then(({data}) =>
@@ -37,7 +38,7 @@ export const fetchPizza = (sort, category)=> (dispatch) => {
         )
 }
 
-/*type ItemsType ={
+type ItemsType = {
     id: number,
     imageUrl: string,
     name: string,
@@ -49,7 +50,6 @@ export const fetchPizza = (sort, category)=> (dispatch) => {
 }
 export type InitialStateType = typeof InitialState
 type ActionsType = InferActionsTypes<typeof actionsPizza>
-
-type ThunkType = BaseThunkType<ActionsType>*/
+type ThunkType = BaseThunkType<ActionsType>
 
 export default pizzasReducer

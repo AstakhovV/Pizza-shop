@@ -1,10 +1,12 @@
-import React, {useCallback, useEffect} from 'react'
+import * as React from 'react'
+import {useCallback, useEffect} from 'react'
 import {Categories, SortPopup, PizzaBlock} from "../components";
 import {useDispatch, useSelector} from "react-redux";
-import {actionsFilters} from "../redux/reducer/filters-reducer";
+import {actionsFilters, SortBy} from "../redux/reducer/filters-reducer";
 import {fetchPizza} from "../redux/reducer/pizzas-reducer";
 import {PizzaLoadingBlock} from "../components/PizzaBlock/PizzaLoadingBlock";
-import {actions} from "../redux/reducer/cart-reducer";
+import {actions, PizzaObjTyp} from "../redux/reducer/cart-reducer";
+import {AppStateType} from "../redux/store";
 
 const categoryNames = ['Мясные', 'Вегетарианская', 'Гриль', 'Острые', 'Закрытые']
 const  sortItem = [
@@ -12,14 +14,16 @@ const  sortItem = [
     {name: 'цене', type: 'price', order: 'desc'},
     {name: 'алфавиту', type: 'name', order: 'asc'}
 ]
+type PropType = {}
 
-export const Home = () => {
+export const Home: React.FC<PropType> = () => {
     const dispatch = useDispatch()
-    const itemsPizza = useSelector(state => state.pizzas.items)
-    const itemsLoading = useSelector(state => state.pizzas.isLoaded)
-    const activeSort = useSelector(state => state.filters.sortBy)
-    const cartItems = useSelector(state => state.cart.items)
-    const activeCategory = useSelector(state => state.filters.category)
+
+    const itemsPizza = useSelector((state:AppStateType) => state.pizzas.items)
+    const itemsLoading: boolean = useSelector((state:AppStateType) => state.pizzas.isLoaded)
+    const activeSort: SortBy = useSelector((state:AppStateType) => state.filters.sortBy)
+    const cartItems: Array<PizzaObjTyp> = useSelector((state:AppStateType) => state.cart.items)
+    const activeCategory: null | number = useSelector((state:AppStateType) => state.filters.category)
 
     const result = cartItems.reduce(function(acc, el) {
         acc[el.name] = (acc[el.name] || 0) + 1;
@@ -46,7 +50,6 @@ export const Home = () => {
         <div className="container">
             <div className="content__top">
                 <Categories
-                    activeSort={activeSort}
                     activeCategory={activeCategory}
                     onClickItem={dispatchByCategory}
                     items={categoryNames}/>

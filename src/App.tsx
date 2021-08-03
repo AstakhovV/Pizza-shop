@@ -1,9 +1,7 @@
-import './App.css';
 import * as React from 'react'
 import {Header} from "./components";
 import {Cart, Home} from "./pages";
 import {Route} from "react-router-dom";
-
 
 export const App = () => {
     return (
