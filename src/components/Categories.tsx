@@ -1,13 +1,13 @@
 import * as React from 'react'
 
-const categoryNames: Array<string> = ['Мясные', 'Вегетарианская', 'Гриль', 'Острые', 'Закрытые']
-
 type PropTypes = {
     activeCategory: null | number,
     onClickItem: (index: number | null) => void
 }
 
 export const Categories: React.FC<PropTypes> = React.memo(function Categories({onClickItem, activeCategory}) {
+    const categoryNames: Array<string> = ['Мясные', 'Вегетарианская', 'Гриль', 'Острые', 'Закрытые']
+
     return (
         <div className="categories">
             <ul>

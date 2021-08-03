@@ -1,12 +1,6 @@
 import * as React from "react";
 import {useEffect, useRef, useState} from "react";
 
-const  sortItem: ({ name: string; type: string; order: string })[] = [
-    {name: 'популярности', type: 'rating', order: 'desc'},
-    {name: 'цене', type: 'price', order: 'desc'},
-    {name: 'алфавиту', type: 'name', order: 'asc'}
-]
-
 
 type PropTypes = {
     activeSort: string,
@@ -16,9 +10,13 @@ export const SortPopup: React.FC<PropTypes> = React.memo(({ activeSort, onClickS
 
     const [visiblePopup, setVisiblePopup] = useState(false)
     const sortRef = useRef(null)
-    if (sortItem){
-        var activeItem = sortItem.find(obj => obj.type === activeSort).name
-    }
+
+    const  sortItem: ({ name: string; type: string; order: string })[] = [
+        {name: 'популярности', type: 'rating', order: 'desc'},
+        {name: 'цене', type: 'price', order: 'desc'},
+        {name: 'алфавиту', type: 'name', order: 'asc'}
+    ]
+    const activeItem = sortItem.find(obj => obj.type === activeSort).name
 
     const toggleVisiblePopup = () => {
         setVisiblePopup(!visiblePopup)
