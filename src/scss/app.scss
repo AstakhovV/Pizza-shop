@@ -126,10 +126,14 @@ body {
     span {
       display: inline-block;
       margin-left: 7px;
-      color: #b6b6b6;
+      color: white;
       font-size: 18px;
     }
-
+    svg {
+      path {
+        stroke: white;
+      }
+    }
     span,
     svg,
     path {

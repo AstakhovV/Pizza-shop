@@ -5,7 +5,7 @@ type PropTypes = {
     className?: string,
     outline?: boolean,
     children?: string | number | React.ReactNode,
-    onClick?: (obj) => void
+    onClick?: (obj: any) => void
 }
 
 export const Button: React.FC<PropTypes> = ({className, outline, children, onClick}) => {
