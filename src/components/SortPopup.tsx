@@ -27,7 +27,7 @@ export const SortPopup: React.FC<PropTypes> = React.memo(({items, activeSort, on
             setVisiblePopup(false)
         }
     }
-    const changePopup = (obj) => {
+    const changePopup = (obj:any) => {
         onClickSort(obj)
         setVisiblePopup(false)
     }

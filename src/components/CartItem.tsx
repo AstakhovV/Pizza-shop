@@ -8,21 +8,21 @@ type PropTypes = {
     type: number,
     size: number,
     value: number,
-    addPizza: (arg0: boolean) => void,
-    removePizza: (arg0: boolean) => void,
-    clearPizza: (arg0: boolean) => void,
+    addPizza: (key: number) => void,
+    removePizza: (key: number) => void,
+    clearPizza: (key: number) => void,
     randomKey: number
 }
 
 export const CartItem: React.FC<PropTypes> = ({randomKey,name, size, type, imgURl, price, value, removePizza, addPizza, clearPizza}) => {
 
-    const handleAdd = (randomKey) => {
+    const handleAdd = (randomKey: number) => {
         addPizza(randomKey)
     }
-    const handleRemove = (randomKey) => {
+    const handleRemove = (randomKey: number) => {
         removePizza(randomKey)
     }
-    const handleClear = (randomKey) => {
+    const handleClear = (randomKey: number) => {
         clearPizza(randomKey)
     }
     return (

@@ -25,10 +25,10 @@ export const PizzaBlock: React.FC<PropTypes> = (props) => {
     const [pricePizza, setPricePizza] = useState(price[0])
 
 
-    const onSelectType = (index) => {
+    const onSelectType = (index: number) => {
         setActiveType(index)
     }
-    const onSelectSize = (index, size) => {
+    const onSelectSize = (index: number, size: number) => {
         setActiveSize(sizes[sizes.indexOf(size)])
         setPricePizza(price[sizes.indexOf(size)])
     }
