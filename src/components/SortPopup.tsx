@@ -16,7 +16,7 @@ export const SortPopup: React.FC<PropTypes> = React.memo(({items, activeSort, on
 
     const [visiblePopup, setVisiblePopup] = useState(false)
     const sortRef = useRef(null)
-    const activeItem = items.find(obj => obj.type === activeSort).name
+    const activeItem = items?.find(obj => obj.type === activeSort).name
 
     const toggleVisiblePopup = () => {
         setVisiblePopup(!visiblePopup)
