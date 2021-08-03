@@ -10,7 +10,7 @@ type ObjectProp = {
 type PropTypes = {
     activeSort: string,
     items: Array<ObjectProp>,
-    onClickSort: (item) => void
+    onClickSort: (obj:any) => void
 }
 export const SortPopup: React.FC<PropTypes> = React.memo(({items, activeSort, onClickSort})=>{
 
@@ -27,8 +27,8 @@ export const SortPopup: React.FC<PropTypes> = React.memo(({items, activeSort, on
             setVisiblePopup(false)
         }
     }
-    const changePopup = (item) => {
-        onClickSort(item)
+    const changePopup = (obj) => {
+        onClickSort(obj)
         setVisiblePopup(false)
     }
 

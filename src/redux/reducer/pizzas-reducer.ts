@@ -1,5 +1,5 @@
 import axios from "axios";
-import {BaseThunkType, InferActionsTypes} from "../store";
+import { InferActionsTypes} from "../store";
 import {SortBy} from "./filters-reducer";
 
 const InitialState = {
@@ -50,6 +50,6 @@ type ItemsType = {
 }
 export type InitialStateType = typeof InitialState
 type ActionsType = InferActionsTypes<typeof actionsPizza>
-type ThunkType = BaseThunkType<ActionsType>
+
 
 export default pizzasReducer

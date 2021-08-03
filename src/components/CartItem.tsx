@@ -8,9 +8,9 @@ type PropTypes = {
     type: number,
     size: number,
     value: number,
-    addPizza: (boolean) => void,
-    removePizza: (boolean) => void,
-    clearPizza: (boolean) => void,
+    addPizza: (arg0: boolean) => void,
+    removePizza: (arg0: boolean) => void,
+    clearPizza: (arg0: boolean) => void,
     randomKey: number
 }
 

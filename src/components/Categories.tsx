@@ -3,7 +3,7 @@ import * as React from 'react'
 type PropTypes = {
     items: Array<string>,
     activeCategory: null | number,
-    onClickItem: (index) => void
+    onClickItem: (index: number | null) => void
 }
 
 export const Categories: React.FC<PropTypes> = React.memo(function Categories({items, onClickItem, activeCategory}) {

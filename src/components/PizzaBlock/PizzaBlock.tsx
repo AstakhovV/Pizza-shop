@@ -10,7 +10,7 @@ type PropTypes = {
     price: Array<number>,
     types: Array<number>,
     sizes: Array<number>,
-    onClickAddPizza: (obj) => void,
+    onClickAddPizza: (obj: { randomKey: number; size: number; price: number; imageUrl: string; name: string; id: number; type: string }) => void,
     addedCount: number,
     randomKey: number
 }
