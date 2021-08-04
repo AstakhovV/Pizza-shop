@@ -60,17 +60,20 @@ const cartReducer = (state = InitialState, action: ActionsType):InitialStateType
                 ...state.items
             ]
             const newPizza = newItems.filter(item => item.randomKey === action.payload)[0]
+
             const pizzaArrDelete = newItems.filter(item =>{
                 return (item.name === newPizza.name && item.size === newPizza.size && item.type === newPizza.type)
             } )
-            for (let item of pizzaArrDelete){
-                // @ts-ignore
-                newItems.splice(item, 1)
+            const priceToDelete = newPizza.price * pizzaArrDelete.length
+            for (let i=0; i < pizzaArrDelete.length; i++){
+                const indexToDelete = newItems.indexOf(pizzaArrDelete[i])
+                newItems.splice(indexToDelete, 1)
             }
+
             return {
                 ...state,
                 items: newItems,
-                totalPrice : state.totalPrice - newPizza.price * pizzaArrDelete.length,
+                totalPrice : state.totalPrice - priceToDelete,
                 itemsCount : state.itemsCount - pizzaArrDelete.length
             }
         }
